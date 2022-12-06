@@ -6,8 +6,6 @@ export async function getMealList() {
 
   if (storageString !== null) {
     const storageMealList: MealData[] = JSON.parse(storageString);
-
-    console.log(storageMealList, 'AMAMA')
     return storageMealList;
   } else {
     return [] as MealData[];

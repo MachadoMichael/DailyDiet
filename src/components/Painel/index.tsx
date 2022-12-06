@@ -1,8 +1,8 @@
 import {
   ArrowForHome,
   ArrowForStatitics,
-  ContainerHome,
-  ContainerStatistics,
+  Home,
+  Statistics,
   PercentText,
   Text,
 } from "./styles";
@@ -26,7 +26,7 @@ export function Painel({ showDetails }: Props) {
 
   if (showDetails === true) {
     return (
-      <ContainerHome
+      <Home
         bgColor={percentOnDiet >= 50 ? COLORS.GREEN_LIGHT : COLORS.RED_LIGHT}
         onPress={() => navigate("statistics")}
       >
@@ -40,11 +40,11 @@ export function Painel({ showDetails }: Props) {
 
         <PercentText>{percentOnDiet.toFixed(2)}%</PercentText>
         <Text>das refeições dentro da dieta</Text>
-      </ContainerHome>
+      </Home>
     );
   } else {
     return (
-      <ContainerStatistics
+      <Statistics
         bgColor={percentOnDiet >= 50 ? COLORS.GREEN_LIGHT : COLORS.RED_LIGHT}
       >
         <ArrowForHome>
@@ -58,7 +58,7 @@ export function Painel({ showDetails }: Props) {
 
         <PercentText>{percentOnDiet.toFixed(2)}%</PercentText>
         <Text>das refeições dentro da dieta</Text>
-      </ContainerStatistics>
+      </Statistics>
     );
   }
 }

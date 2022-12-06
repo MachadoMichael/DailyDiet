@@ -16,13 +16,15 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Select } from "../../components/Select";
 import { useTheme } from "styled-components/native";
-import { NewMealFeedback } from "../../components/NewMealFeedback";
+
 import { MealsContext } from "../../Context/MealsContext";
 import { CalculatorContext } from "../../Context/CalculatorContext";
+import { SelectedMealContext } from "../../Context/SelectedMealContext";
 
 import { setMealList } from "../../storage/setMealList";
+import { deleteMeal } from "../../storage/deleteMeal";
 
-export function NewMeal() {
+export function UpdateMeal() {
   const [focus, setFocus] = useState(false);
   const [onDiet, setOnDiet] = useState(true);
 
@@ -31,23 +33,30 @@ export function NewMeal() {
   const [date, setDate] = useState("");
   const [hour, setHour] = useState("");
 
-  const [showModal, setShowModal] = useState(false);
-  const [feedbackIsPositive, setFeedbackIsPositive] = useState(false);
-
   const { navigate } = useNavigation();
 
+  const { selectedMeal } = useContext(SelectedMealContext);
   const { meals, setMeals } = useContext(MealsContext);
   const { setCurrentSequence } = useContext(CalculatorContext);
 
   const { COLORS } = useTheme();
 
-  function clearFields() {
-    setFoodName("");
-    setComment("");
-    setDate("");
-    setHour("");
-    setOnDiet(true);
-  }
+  useEffect(() => {
+    setFoodName(selectedMeal.name);
+    setComment(selectedMeal.comment);
+    setDate(selectedMeal.date);
+    setHour(selectedMeal.hour);
+    setOnDiet(selectedMeal.onDiet);
+
+    deleteMeal(selectedMeal.id).then((response) => {
+      if (response !== undefined) {
+        setMeals(response);
+        setMealList(response);
+      } else {
+        console.log("updating");
+      }
+    });
+  }, []);
 
   function mealValidation() {
     const fields = [foodName, comment, date, hour];
@@ -76,20 +85,8 @@ export function NewMeal() {
     setMeals(newMealsList);
     setMealList(newMealsList);
 
-    dietSequenceValidation(onDiet);
-
-    setFeedbackIsPositive(onDiet);
-    setShowModal(true);
-
-    clearFields();
-  }
-
-  function dietSequenceValidation(onDiet: boolean) {
-    if (onDiet === true) {
-      setCurrentSequence((prevState) => prevState + 1);
-    } else {
-      setCurrentSequence(0);
-    }
+    alert("Refeição atualizada com sucesso.");
+    navigate("home");
   }
 
   return (
@@ -159,19 +156,10 @@ export function NewMeal() {
         <Button
           size="BIG"
           style="DARK"
-          text="Cadastrar refeição"
+          text="Atualizar refeição"
           onPress={mealValidation}
         />
       </Section>
-
-      {showModal === true ? (
-        <NewMealFeedback
-          setFeedbackIsPositive={setFeedbackIsPositive}
-          feedbackIsPositive={feedbackIsPositive}
-        />
-      ) : (
-        false
-      )}
     </Container>
   );
 }

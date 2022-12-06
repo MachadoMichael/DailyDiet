@@ -28,7 +28,6 @@ export function MealDetails() {
   const { navigate } = useNavigation();
   const { selectedMeal } = useContext(SelectedMealContext);
   const { setMeals } = useContext(MealsContext);
-
   const { COLORS } = useTheme();
 
   function removeMeal() {
@@ -90,6 +89,7 @@ export function MealDetails() {
             style="DARK"
             icon="PENCIL"
             text="Editar refeição"
+            onPress={() => navigate("updatemeal")}
           />
           <Button
             size="BIG"

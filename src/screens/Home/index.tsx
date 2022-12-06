@@ -26,7 +26,7 @@ export function Home() {
   }, []);
 
   return (
-    <Container disableScrollViewPanResponder>
+    <Container>
       <Header />
       <Painel showDetails={true} />
       <NewMealContainer>
@@ -39,6 +39,7 @@ export function Home() {
           onPress={() => navigate("newmeal")}
         />
       </NewMealContainer>
+
       <MealList />
     </Container>
   );

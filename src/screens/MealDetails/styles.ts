@@ -51,11 +51,11 @@ export const SubTitle = styled.Text`
 export const Text = styled.Text``;
 
 export const DietBox = styled.View`
-  max-width: 137px;
+  max-width: 160px;
   align-items: center;
   flex-direction: row;
   padding: 14px;
-  justify-content: space-between;
+  justify-content: space-around;
   border-radius: 1000px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_600};
 `;
@@ -64,6 +64,4 @@ export const ButtonBox = styled.View`
   height: 24%;
   justify-content: space-evenly;
   align-items: center;
-
-  /* background-color: brown; */
 `;

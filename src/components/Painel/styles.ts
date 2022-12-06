@@ -1,25 +1,21 @@
 import styled from "styled-components/native";
 
-export const ContainerHome = styled.Pressable<{ bgColor: string }>`
-  transition: 2seconds;
+export const Home = styled.Pressable<{ bgColor: string }>`
   border-radius: 6px;
   background-color: ${(props) => props.bgColor};
-  width: 327px;
+  width: 100%;
   height: 136px;
   justify-content: center;
   align-items: center;
-  padding-bottom: 20px;
 `;
 
-export const ContainerStatistics = styled.View<{ bgColor: string }>`
-  transition: 2seconds;
+export const Statistics = styled.View<{ bgColor: string }>`
   border-radius: 6px;
   background-color: ${(props) => props.bgColor};
   width: 100%;
   height: 30%;
   justify-content: center;
   align-items: center;
-  padding-bottom: 20px;
 `;
 
 export const Text = styled.Text`
